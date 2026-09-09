@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPNEX - Performans ve Antrenman Takip Portalı</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo" onclick="handleLogoClick()">REP<span>NEX</span></div>
+            <div class="nav-actions" id="navActions"></div>
+        </div>
+    </nav>
+
+    <!-- 1. LANDING PAGE -->
+    <main id="viewLanding" class="page-view active">
+        <div class="container">
+            <section class="hero-landing">
+                <div class="hero-badge">HAFTALIK MİKRO-DÖNGÜ PERFORMANS PORTALI</div>
+                <h1>HER TEKRAR BİR HESAPLAŞMA. <span>RAKAMLARINA HÂKİM OL.</span></h1>
+                <p>Salondaki hislere değil; haftalık set hacmine, ağırlık artışına ve tükeniş setlerine odaklan. Repnex ile gelişimini hafta hafta inşa et.</p>
+                <div class="hero-buttons">
+                    <button class="btn-lime" onclick="navigateTo('auth', 'register')">Hemen Başla</button>
+                    <button class="btn-outline" onclick="navigateTo('auth', 'login')">Giriş Yap</button>
+                </div>
+            </section>
+
+            <section class="info-grid">
+                <div class="info-card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Progressive Overload</h3>
+                    <p>Aynı ağırlıklarla aynı tekrarları yapmak seni büyütmez. Bir önceki haftanın seansını anında gör, bara fazladan 1 plaka ekle.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>RPE ve Tükeniş Analizi</h3>
+                    <p>Hangi sette failure'a gittin? RPE cetveliyle merkezi sinir sistemini tüketmeden maksimum hipertrofiyi yakala.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Özelleştirilebilir Rutinler</h3>
+                    <p>Hedefine ve haftalık gün sayına (3, 4, 5 gün) göre sıralı, net set ve tekrar dökümlü programını kendin yönet.</p>
+                </div>
+            </section>
+
+            <section class="splits-section">
+                <div class="section-title">
+                    <h2>DESTEKLENEN <span>ANTRENMAN DİSİPLİNLERİ</span></h2>
+                    <p>İster klasik split çalış ister modern hipertrofi protokollerini uygula; sistem tüm rutinlerine adapte olur.</p>
+                </div>
+
+                <div class="splits-grid">
+                    <div class="split-card">
+                        <span class="split-tag">PPL DÖNGÜSÜ</span>
+                        <h4>Push / Pull / Legs</h4>
+                        <p>Göğüs, omuz, triceps itişleri; sırt ve biceps çekişleri; saf bacak günleri. Klasik ve en etkili hipertrofi rutini.</p>
+                    </div>
+                    <div class="split-card">
+                        <span class="split-tag">İZOLASYON</span>
+                        <h4>Omuz & Deltoid</h4>
+                        <p>Ön, yan ve arka omuz başlarını hedefleyen dikey itiş ve yana açış varyasyonları.</p>
+                    </div>
+                    <div class="split-card">
+                        <span class="split-tag">HİPERTROFİ</span>
+                        <h4>Kol (Arm Day)</h4>
+                        <p>Biceps ve triceps için süperset, drop set ve tükeniş odaklı tam kapsamlı kol seansları.</p>
+                    </div>
+                    <div class="split-card">
+                        <span class="split-tag">KONDİSYON</span>
+                        <h4>Kardiyo & Core</h4>
+                        <p>Eğimli yürüyüş, koşu, bisiklet ve merkez bölge için süre ve yoğunluk odaklı takip.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-banner">
+                <h3>BAHANELERİ KAPIDA BIRAK.</h3>
+                <p>Not defterleriyle ya da hafızana güvenerek vakit kaybetmeyi bırak. Antrenman günlüğünü profesyonel bir seviyeye taşı.</p>
+                <button class="btn-lime" style="padding: 14px 32px; font-size: 0.95rem;" onclick="navigateTo('auth', 'register')">Ücretsiz Hesabını Oluştur</button>
+            </section>
+        </div>
+    </main>
+
+    <!-- 2. AUTH -->
+    <main id="viewAuth" class="page-view">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Giriş Yap</button>
+                    <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Kayıt Ol</button>
+                </div>
+
+                <div id="authError" class="auth-error"></div>
+
+                <form id="formLogin" class="auth-form active">
+                    <div class="form-group">
+                        <label for="loginEmail">E-Posta</label>
+                        <input type="email" id="loginEmail" placeholder="ornek@mail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Şifre</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-lime" style="width: 100%; padding: 12px; margin-top: 10px;">Giriş Yap</button>
+                </form>
+
+                <form id="formRegister" class="auth-form">
+                    <div class="form-group">
+                        <label for="regName">Ad Soyad</label>
+                        <input type="text" id="regName" placeholder="Ad Soyad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">E-Posta</label>
+                        <input type="email" id="regEmail" placeholder="ornek@mail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Şifre</label>
+                        <input type="password" id="regPassword" placeholder="Şifreniz" required>
+                    </div>
+                    <button type="submit" class="btn-lime" style="width: 100%; padding: 12px; margin-top: 10px;">REPNEX'e Katıl</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- 3. DASHBOARD -->
+    <main id="viewDashboard" class="page-view">
+        <div class="container">
+            <div class="dashboard-header">
+                <div>
+                    <h2>HOŞ GELDİN, <span id="dashUserName">SPORCU</span></h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;" id="dashWeekRangeText">Haftalık Performans Bloğu</p>
+                </div>
+                <div class="dashboard-actions">
+                    <div class="dash-tabs">
+                        <button class="dash-tab-btn active" id="tabWorkoutsBtn" onclick="switchDashboardTab('workouts')">Bu Hafta</button>
+                        <button class="dash-tab-btn" id="tabRoutineBtn" onclick="switchDashboardTab('routine')">Haftalık Programım</button>
+                        <button class="dash-tab-btn" id="tabProfileBtn" onclick="switchDashboardTab('profile')">Profil & Arşiv</button>
+                    </div>
+                    <button class="btn-lime" id="addSetBtnTop" onclick="openModal()">+ Yeni Set / Aktivite</button>
+                </div>
+            </div>
+
+            <!-- SEKMELER: 1. BU HAFTANIN GÜNLÜĞÜ -->
+            <div id="dashSectionWorkouts" class="dash-section active">
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="label">Bu Hafta İdman</div>
+                        <div class="value" id="statWeeklyWorkouts">0 Gün</div>
+                        <span class="stat-sub">Haftalık Devamlılık</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Haftanın Zirvesi</div>
+                        <div class="value highlight-lime" id="statPeakWeight">0 kg</div>
+                        <span class="stat-sub" id="statPeakExercise">Bu Haftanın En Ağırı</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Haftalık Toplam Set</div>
+                        <div class="value" id="statTotalSets">0</div>
+                        <span class="stat-sub" id="statFailureCount">0 Tükeniş (Failure)</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Haftalık Efor (RPE)</div>
+                        <div class="value" id="statAvgRpe">-</div>
+                        <span class="stat-sub">Ortalama Şiddet</span>
+                    </div>
+                </div>
+
+                <div class="muscle-breakdown-card">
+                    <div class="breakdown-header">
+                        <h4>BU HAFTANIN KAS & AKTİVİTE DAĞILIMI</h4>
+                        <span id="breakdownTotalSets">Toplam 0 Kayıt</span>
+                    </div>
+                    <div class="breakdown-bars" id="muscleBarsContainer"></div>
+                </div>
+
+                <div class="session-feed-container">
+                    <div class="session-feed-header">
+                        <div class="search-box">
+                            <input type="text" id="workoutSearchInput" placeholder="Bu haftanın hareketlerinde ara..." oninput="handleWorkoutSearch()">
+                        </div>
+                        <div class="filter-group">
+                            <button class="filter-btn active" onclick="filterWorkouts('all')">Tümü</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Push')">İtiş</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Pull')">Çekiş</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Legs')">Bacak</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Shoulders')">Omuz</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Arms')">Kol</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Upper')">Üst</button>
+                            <button class="filter-btn" onclick="filterWorkouts('Cardio')">Kardiyo</button>
+                        </div>
+                    </div>
+
+                    <div id="sessionFeed" class="session-feed-list"></div>
+
+                    <div id="emptyMessage" class="empty-state">
+                        Bu hafta henüz kayıtlı bir aktiviten bulunmuyor. Yeni haftaya başlamak için yukarıdaki <strong>"+ Yeni Set / Aktivite"</strong> butonuna bas!
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEKMELER: 2. HAFTALIK PROGRAMIM -->
+            <div id="dashSectionRoutine" class="dash-section">
+                <div class="routine-controls-panel">
+                    <div class="routine-control-group">
+                        <label>Öncelikli Hedef:</label>
+                        <select id="routineGoalSelect" onchange="onRoutineFilterChange()">
+                            <option value="Hipertrofi (Kas Kazanımı)">Hipertrofi (Maksimum Kas Kütlesi)</option>
+                            <option value="Güç & Powerlifting">Saf Güç & Powerlifting</option>
+                            <option value="Definasyon & Yağ Yakımı">Definasyon & Kondisyon</option>
+                            <option value="Fonksiyonel Fitness">Genel Sağlık & Fonksiyonellik</option>
+                        </select>
+                    </div>
+
+                    <div class="routine-control-group">
+                        <label>Haftalık Frekans:</label>
+                        <div class="frequency-btn-group">
+                            <button class="freq-btn" id="freqBtn3" onclick="setRoutineDays(3)">3 Gün</button>
+                            <button class="freq-btn active" id="freqBtn4" onclick="setRoutineDays(4)">4 Gün</button>
+                            <button class="freq-btn" id="freqBtn5" onclick="setRoutineDays(5)">5 Gün</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="routine-meta-info">
+                    <h3 id="routineHeadingTitle">Program Başlığı</h3>
+                    <p id="routineHeadingDesc">Program açıklaması burada yer alır.</p>
+                </div>
+
+                <div class="routine-days-container" id="routineDaysContainer"></div>
+            </div>
+
+            <!-- SEKMELER: 3. PROFİL & ARŞİV -->
+            <div id="dashSectionProfile" class="dash-section">
+                <div class="profile-layout">
+                    <div class="profile-summary-card">
+                        <div class="avatar-box">
+                            <span id="profileAvatarLetter">S</span>
+                        </div>
+                        <h3 id="profileSummaryName">Sporcu</h3>
+                        <span class="profile-role-badge" id="profileGoalBadge">Hipertrofi Odaklı</span>
+
+                        <div class="bio-quick-grid">
+                            <div class="bio-stat">
+                                <span class="bio-stat-label">VKI (BMI)</span>
+                                <strong class="bio-stat-val" id="profileBmiVal">--</strong>
+                            </div>
+                            <div class="bio-stat">
+                                <span class="bio-stat-label">Durum</span>
+                                <strong class="bio-stat-val" id="profileBmiStatus">--</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-form-card">
+                        <div class="card-header" style="margin-bottom: 20px;">
+                            <h3 style="text-transform: uppercase; font-size: 1.1rem; font-weight: 800;">Kişisel ve Biyometrik Bilgiler</h3>
+                        </div>
+
+                        <form id="athleteProfileForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="profFullName">Ad Soyad</label>
+                                    <input type="text" id="profFullName" placeholder="Ad Soyad" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profEmail">E-Posta</label>
+                                    <input type="email" id="profEmail" placeholder="ornek@mail.com" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="profPhone">Telefon</label>
+                                    <input type="tel" id="profPhone" placeholder="05XX XXX XX XX">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profAge">Yaş</label>
+                                    <input type="number" id="profAge" min="14" max="100" placeholder="20">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="profHeight">Boy (cm)</label>
+                                    <input type="number" id="profHeight" min="100" max="250" placeholder="180">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profWeight">Kilo (kg)</label>
+                                    <input type="number" id="profWeight" step="0.1" min="30" max="300" placeholder="75">
+                                </div>
+
+                                <div class="form-group col-span-2">
+                                    <label for="profGoal">Öncelikli Antrenman Hedefi</label>
+                                    <select id="profGoal">
+                                        <option value="Hipertrofi (Kas Kazanımı)">Hipertrofi (Maksimum Kas Kütlesi)</option>
+                                        <option value="Güç & Powerlifting">Saf Güç & Powerlifting</option>
+                                        <option value="Definasyon & Yağ Yakımı">Definasyon & Kondisyon</option>
+                                        <option value="Fonksiyonel Fitness">Genel Sağlık & Fonksiyonellik</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                                <button type="submit" class="btn-lime">Değişiklikleri Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="archive-section">
+                    <div class="card-header" style="margin-bottom: 20px;">
+                        <div>
+                            <h3 style="text-transform: uppercase; font-size: 1.2rem; font-weight: 900;">HAFTALIK HACİM GRAFİĞİ & GEÇMİŞ ARŞİVİ</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Tamamlanan haftaların set yoğunluğu ve zirve ağırlık geçmişi</p>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Haftalara Göre Toplam Set Sayısı</div>
+                        <div class="bar-chart" id="weeklyBarChart"></div>
+                    </div>
+
+                    <div class="past-weeks-list" id="pastWeeksList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- AKILLI DİNAMİK MODAL FORM -->
+    <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+        <div class="modal">
+            <div class="modal-top">
+                <h3 id="modalTitleText" style="text-transform: uppercase; font-weight: 800;">Yeni Kayıt Ekle</h3>
+                <button class="btn-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="workoutForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="date">Tarih</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="split">Antrenman Programı / Bölge</label>
+                        <select id="split" onchange="onProgramChange()" required>
+                            <option value="Push">İtiş (Göğüs, Ön Omuz, Triceps)</option>
+                            <option value="Pull">Çekiş (Sırt, Biceps, Arka Omuz)</option>
+                            <option value="Legs">Bacak (Quads, Hamstrings, Kalf)</option>
+                            <option value="Shoulders">Omuz (Deltoid Odaklı)</option>
+                            <option value="Arms">Kol (Biceps & Triceps İzole)</option>
+                            <option value="Upper">Üst Vücut Karma</option>
+                            <option value="Cardio">Kardiyo & Kondisyon</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-span-2">
+                        <label for="exerciseSelect">Egzersiz / Aktivite Seç</label>
+                        <select id="exerciseSelect" onchange="updateExerciseDescription()" required></select>
+                        
+                        <div id="exerciseDescBox" class="exercise-info-tip">
+                            <span class="info-tip-icon">ℹ️</span>
+                            <span id="exerciseDescText">Hareket seçildiğinde Türkçe uygulama rehberi burada görünecek.</span>
+                        </div>
+                    </div>
+
+                    <div id="weightWorkoutFields" class="col-span-2 form-grid">
+                        <div class="form-group">
+                            <label for="setType">Set Tipi</label>
+                            <select id="setType">
+                                <option value="Normal">Normal Set</option>
+                                <option value="Warmup">Isınma Seti</option>
+                                <option value="Drop Set">Drop Set</option>
+                                <option value="Failure">Tükeniş (Failure)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sets">Set Sayısı</label>
+                            <input type="number" id="sets" min="1" placeholder="4">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reps">Tekrar Sayısı</label>
+                            <input type="number" id="reps" min="1" placeholder="10">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight">Ağırlık (kg)</label>
+                            <input type="number" id="weight" step="0.5" min="0" placeholder="80">
+                        </div>
+                    </div>
+
+                    <div id="cardioWorkoutFields" class="col-span-2 form-grid" style="display: none;">
+                        <div class="form-group">
+                            <label for="cardioDuration">Süre (Dakika)</label>
+                            <input type="number" id="cardioDuration" min="1" placeholder="Örn: 25">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardioIncline">Eğim / Direnç Seviyesi (%)</label>
+                            <input type="number" id="cardioIncline" step="0.5" min="0" placeholder="Örn: 8">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-span-2">
+                        <label for="rpe">RPE Değeri (1-10 Efor / Zorluk Derecesi)</label>
+                        <input type="number" id="rpe" min="1" max="10" step="0.5" placeholder="8.5">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-lime" style="width: 100%; margin-top: 10px; padding: 14px;">
+                    Kaydı Günlüğe Ekle
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ÇEREZ ONAY BANNERI -->
+    <div id="cookieConsentBanner" class="cookie-banner">
+        <div class="container cookie-content">
+            <p>Deneyimini geliştirmek ve site tercihlerini hatırlamak için çerezler (cookies) kullanıyoruz.</p>
+            <div class="cookie-actions">
+                <button class="btn-outline" onclick="rejectCookies()">Reddet</button>
+                <button class="btn-lime" onclick="acceptCookies()">Kabul Et</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

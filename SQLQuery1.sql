@@ -1,0 +1,10 @@
+USE IronTrackDB;
+GO
+
+ALTER TABLE Users ADD 
+    Phone NVARCHAR(20) NULL,
+    Age INT NULL,
+    Height DECIMAL(5,2) NULL,
+    Weight DECIMAL(5,2) NULL,
+    Goal NVARCHAR(100) NULL;
+GO
