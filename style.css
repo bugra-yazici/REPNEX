@@ -1298,7 +1298,7 @@ input:focus, select:focus, textarea:focus {
     cursor: pointer;
 }
 
-.btn-close:hover { color: #fff; }
+.btn-close:hover { color: #fffdfd; }
 
 .form-grid {
     display: grid;

@@ -1524,7 +1524,7 @@ function renderWeeklyArchive() {
                     <strong>${w.totalSets} Set/Seans</strong>
                 </div>
                 <div class="past-week-stat-item">
-                    Haftanın Zirvesi
+                    Bu Haftanın Zirvesi
                     <strong style="color:var(--accent-lime);">${w.peakWeight} kg</strong>
                 </div>
                 <div class="past-week-stat-item">
